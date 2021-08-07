@@ -8,4 +8,16 @@
     <ProjectReference Include="..\Bookshelf.Domain\Bookshelf.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Books\Commands\" />
+    <Folder Include="Features\ShelfBooks\Commands\" />
+    <Folder Include="Features\Shelves\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
 </Project>
