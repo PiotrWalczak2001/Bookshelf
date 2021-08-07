@@ -13,11 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{9A7AD20D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1F74C441-F064-4805-AB5B-AF43B02DB900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Domain", "Bookshelf.Domain\Bookshelf.Domain.csproj", "{E945CCDB-CA2F-476F-8CC4-7B7150D082AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Domain", "Bookshelf.Domain\Bookshelf.Domain.csproj", "{E945CCDB-CA2F-476F-8CC4-7B7150D082AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Application", "Bookshelf.Application\Bookshelf.Application.csproj", "{7D1562FF-200D-46C6-ADBE-C3D7C9F99FA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Application", "Bookshelf.Application\Bookshelf.Application.csproj", "{7D1562FF-200D-46C6-ADBE-C3D7C9F99FA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Persistence", "Bookshelf.Persistence\Bookshelf.Persistence.csproj", "{7427815B-CD5E-450E-B817-4E605E329BF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Persistence", "Bookshelf.Persistence\Bookshelf.Persistence.csproj", "{7427815B-CD5E-450E-B817-4E605E329BF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Api", "Bookshelf.Api\Bookshelf.Api.csproj", "{3C74D7AB-8437-4588-B2B7-55FE829A2D60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{7427815B-CD5E-450E-B817-4E605E329BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7427815B-CD5E-450E-B817-4E605E329BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7427815B-CD5E-450E-B817-4E605E329BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C74D7AB-8437-4588-B2B7-55FE829A2D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C74D7AB-8437-4588-B2B7-55FE829A2D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C74D7AB-8437-4588-B2B7-55FE829A2D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C74D7AB-8437-4588-B2B7-55FE829A2D60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +55,7 @@ Global
 		{E945CCDB-CA2F-476F-8CC4-7B7150D082AF} = {DAA340BA-0E7D-4D53-9DB0-8E5131542C54}
 		{7D1562FF-200D-46C6-ADBE-C3D7C9F99FA0} = {DAA340BA-0E7D-4D53-9DB0-8E5131542C54}
 		{7427815B-CD5E-450E-B817-4E605E329BF4} = {1F74C441-F064-4805-AB5B-AF43B02DB900}
+		{3C74D7AB-8437-4588-B2B7-55FE829A2D60} = {02F42466-22FF-4251-910D-467664963F72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06CC5190-5583-452A-A182-330151CBD9B1}
