@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
+using Bookshelf.Application.Features.Books.Queries.GetBookDetails;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,9 +27,18 @@ namespace Bookshelf.Api.Controllers
             return Ok(dto);
         }
 
-        public async Task<IActionResult> GetAllBooks()
+        [HttpGet("all")]
+        public async Task<ActionResult<List<BookVm>>> GetAllBooks()
         {
-            return Ok(":)");
+            var dtos = await _mediator.Send(new GetAllBooksQuery());
+            return Ok(dtos);
+        }
+
+        [HttpGet("details/{id}")]
+        public async Task<ActionResult<BookDetailsVm>> GetBookById(Guid id)
+        {
+            var query = new GetBookDetailsQuery() { Id = id };
+            return Ok(await _mediator.Send(query));
         }
     }
 }
