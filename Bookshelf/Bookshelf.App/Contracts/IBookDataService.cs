@@ -1,0 +1,17 @@
+﻿using Bookshelf.App.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Bookshelf.App.Services
+{
+    public interface IBookDataService
+    {
+        Task<IEnumerable<BooksListViewModel>> GetAllBooks();
+        Task<BookDetailsViewModel> GetBookDetails(Guid bookId);
+        Task<BookDetailsViewModel> AddBook(BookDetailsViewModel newBook);
+        Task UpdateBook(BookDetailsViewModel bookToUpdate);
+        Task DeleteBook(Guid bookId);
+    }
+}
