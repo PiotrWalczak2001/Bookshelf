@@ -26,6 +26,8 @@ namespace Bookshelf.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -91,7 +93,6 @@ namespace Bookshelf.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NumberOfShelfBooks = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -206,6 +207,38 @@ namespace Bookshelf.Persistence.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "925433D2-557E-45EE-8D84-017918A2D760", 0, "a272545c-6134-461d-89c0-b0b1f22408cc", "jan@testowy.com", true, "Jan", "Testowy", false, null, null, null, null, null, false, "eac9071c-297a-47ee-8429-0713d4871dc0", false, "testuser" });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "Author", "Category", "CoverImageUrl", "Created", "CreatedBy", "Description", "LastModifiedBy", "Modified", "ReleaseDate", "Title" },
+                values: new object[,]
+                {
+                    { new Guid("bb76804e-2e80-4a1b-9015-d22b0ab7aa13"), "Andrzej Sapkowski", "Fantasy", "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "The Last Wish - is the first (in its fictional chronology; published second in original Polish) of the two collections of short stories (the other being Sword of Destiny) preceding the main Witcher Saga, written by Polish fantasy writer Andrzej Sapkowski.", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Last Wish" },
+                    { new Guid("b014368a-98ef-42c9-95f9-1dfe50501085"), "Andrzej Sapkowski", "Fantasy", "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "is the second (in its fictional chronology; first in Polish print) of the two collections of short stories (the other being The Last Wish), both preceding the main Witcher Saga. The stories were written by Polish fantasy author Andrzej Sapkowski.", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sword of Destiny" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ShelfBooks",
+                columns: new[] { "Id", "BookId", "Created", "CreatedBy", "LastModifiedBy", "Modified", "ShelfId" },
+                values: new object[,]
+                {
+                    { new Guid("cf909b3a-01ce-4c9f-a3e9-5740a298378d"), new Guid("bb76804e-2e80-4a1b-9015-d22b0ab7aa13"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("d7a45328-d6f1-4998-a93a-4785cdd415d2") },
+                    { new Guid("77871a16-60a9-495f-ab45-a5a1de113418"), new Guid("b014368a-98ef-42c9-95f9-1dfe50501085"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("7022434d-0913-42e5-98ad-1db0f1a45dd4") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Shelves",
+                columns: new[] { "Id", "Created", "CreatedBy", "LastModifiedBy", "Modified", "Name", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("d7a45328-d6f1-4998-a93a-4785cdd415d2"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Favorite", new Guid("925433d2-557e-45ee-8d84-017918a2d760") },
+                    { new Guid("7022434d-0913-42e5-98ad-1db0f1a45dd4"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "To read", new Guid("925433d2-557e-45ee-8d84-017918a2d760") }
                 });
 
             migrationBuilder.CreateIndex(

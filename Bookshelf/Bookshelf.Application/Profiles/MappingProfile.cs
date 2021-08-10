@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
+using Bookshelf.Application.Features.Books.Queries.GetBookDetails;
 using Bookshelf.Application.Features.ShelfBooks.Queries.GetAllShelfBooks;
 using Bookshelf.Application.Features.Shelves.Queries.GetAllShelves;
 using Bookshelf.Domain.Entities;
@@ -17,6 +18,7 @@ namespace Bookshelf.Application.Profiles
         {
             //books
             CreateMap<Book, BookVm>().ReverseMap();
+            CreateMap<Book, BookDetailsVm>().ReverseMap();
 
             //shelfBooks
             CreateMap<ShelfBook, ShelfBookVm>().ReverseMap();

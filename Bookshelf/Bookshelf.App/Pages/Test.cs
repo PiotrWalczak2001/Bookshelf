@@ -13,6 +13,7 @@ namespace Bookshelf.App.Pages
        public string PassedDataDto { get; set; }
         [Inject]
         public IGetTestDataService getTestDataService { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             PassedDataDto = await getTestDataService.GetData();

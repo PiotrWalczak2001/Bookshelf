@@ -24,5 +24,10 @@ namespace Bookshelf.Api.Controllers
             var dto = "Hejka naklejka";
             return Ok(dto);
         }
+
+        public async Task<IActionResult> GetAllBooks()
+        {
+            return Ok(":)");
+        }
     }
 }
