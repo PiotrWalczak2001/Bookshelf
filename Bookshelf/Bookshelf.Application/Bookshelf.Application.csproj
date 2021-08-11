@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Books\Commands\" />
-    <Folder Include="Features\ShelfBooks\Commands\" />
     <Folder Include="Features\Shelves\Commands\" />
   </ItemGroup>
 

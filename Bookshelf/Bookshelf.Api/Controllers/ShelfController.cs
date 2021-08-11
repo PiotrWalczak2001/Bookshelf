@@ -1,4 +1,5 @@
-﻿using Bookshelf.Application.Features.Shelves.Queries.GetAllShelves;
+﻿using Bookshelf.Application.Features.Shelves.Queries.GetAllBooksFromShelf;
+using Bookshelf.Application.Features.Shelves.Queries.GetAllShelves;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,5 +26,14 @@ namespace Bookshelf.Api.Controllers
             var dtos = await _mediator.Send(new GetAllShelvesQuery());
             return Ok(dtos);
         }
+
+        // getting books from shelf
+        [HttpGet("booksfromshelf/{id}")]
+        public async Task<ActionResult<ShelfWithBooksVm>> GetAllBooksFromShelf(Guid id)
+        {
+            var query = new GetAllBooksFromShelfQuery() { Id = id };
+            return Ok(await _mediator.Send(query));
+        }
+
     }
 }

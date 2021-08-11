@@ -41,14 +41,34 @@ namespace Bookshelf.Persistence
                 Category = "Fantasy"
             });
 
-            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            modelBuilder.Entity<Book>().HasData(new Book
             {
-                Id = "925433D2-557E-45EE-8D84-017918A2D760",
-                FirstName = "Jan",
-                LastName = "Testowy",
-                UserName = "testuser",
-                Email = "jan@testowy.com",
-                EmailConfirmed = true,
+                Id = Guid.Parse("{DC0D3909-1D27-4E1C-AB08-67FEE5985F65}"),
+                Title = "Book1",
+                Author = "Author1",
+                Description = "Description1",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
+                Category = "Crime"
+            });
+
+            modelBuilder.Entity<Book>().HasData(new Book
+            {
+                Id = Guid.Parse("{4873F223-2F4A-4A47-BE34-16F9E997B247}"),
+                Title = "Book2",
+                Author = "Author1",
+                Description = "Description2",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
+                Category = "Biography"
+            });
+
+            modelBuilder.Entity<Book>().HasData(new Book
+            {
+                Id = Guid.Parse("{CCCFCA1C-016C-4D3E-BA83-A1621E42CEA0}"),
+                Title = "Book3",
+                Author = "Author2",
+                Description = "Description3",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
+                Category = "Romance"
             });
 
             modelBuilder.Entity<Shelf>().HasData(new Shelf
@@ -65,18 +85,68 @@ namespace Bookshelf.Persistence
                 Name = "To read"
             });
 
+
+
+
             modelBuilder.Entity<ShelfBook>().HasData(new ShelfBook
             {
                 Id = Guid.Parse("{CF909B3A-01CE-4C9F-A3E9-5740A298378D}"),
                 ShelfId = Guid.Parse("{D7A45328-D6F1-4998-A93A-4785CDD415D2}"),
-                BookId = Guid.Parse("{BB76804E-2E80-4A1B-9015-D22B0AB7AA13}")
+                BookId = Guid.Parse("{BB76804E-2E80-4A1B-9015-D22B0AB7AA13}"),
+                Title = "The Last Wish",
+                Author = "Andrzej Sapkowski",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png"
             });
 
             modelBuilder.Entity<ShelfBook>().HasData(new ShelfBook
             {
                 Id = Guid.Parse("{77871A16-60A9-495F-AB45-A5A1DE113418}"),
                 ShelfId = Guid.Parse("{7022434D-0913-42E5-98AD-1DB0F1A45DD4}"),
-                BookId = Guid.Parse("{B014368A-98EF-42C9-95F9-1DFE50501085}")
+                BookId = Guid.Parse("{B014368A-98EF-42C9-95F9-1DFE50501085}"),
+                Title = "Sword of Destiny",
+                Author = "Andrzej Sapkowski",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png"
+            });
+
+
+
+            modelBuilder.Entity<ShelfBook>().HasData(new ShelfBook
+            {
+                Id = Guid.Parse("{8AAD8E9A-3982-4EDA-8257-084E5216C02F}"),
+                ShelfId = Guid.Parse("{D7A45328-D6F1-4998-A93A-4785CDD415D2}"),
+                BookId = Guid.Parse("{DC0D3909-1D27-4E1C-AB08-67FEE5985F65}"),
+                Title = "Book1",
+                Author = "Author1",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png"
+            });
+
+            modelBuilder.Entity<ShelfBook>().HasData(new ShelfBook
+            {
+                Id = Guid.Parse("{EE38899D-A6F4-49FC-835E-BC1D0F0A7997}"),
+                ShelfId = Guid.Parse("{D7A45328-D6F1-4998-A93A-4785CDD415D2}"),
+                BookId = Guid.Parse("{4873F223-2F4A-4A47-BE34-16F9E997B247}"),
+                Title = "Book2",
+                Author = "Author1",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png"
+            });
+
+            modelBuilder.Entity<ShelfBook>().HasData(new ShelfBook
+            {
+                Id = Guid.Parse("{AFBFC8D5-FE04-4E7A-A339-E0F43144321F}"),
+                ShelfId = Guid.Parse("{7022434D-0913-42E5-98AD-1DB0F1A45DD4}"),
+                BookId = Guid.Parse("{DC0D3909-1D27-4E1C-AB08-67FEE5985F65}"),
+                Title = "Book1",
+                Author = "Author1",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png"
+            });
+            modelBuilder.Entity<ShelfBook>().HasData(new ShelfBook
+            {
+                Id = Guid.Parse("{4D5D90DA-9D71-4145-B7DE-BA95CD078915}"),
+                ShelfId = Guid.Parse("{7022434D-0913-42E5-98AD-1DB0F1A45DD4}"),
+                BookId = Guid.Parse("{CCCFCA1C-016C-4D3E-BA83-A1621E42CEA0}"),
+                Title = "Book3",
+                Author = "Author2",
+                CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png"
             });
 
 
