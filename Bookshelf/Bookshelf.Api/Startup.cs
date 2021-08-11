@@ -2,7 +2,6 @@ using Bookshelf.Application;
 using Bookshelf.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,7 +33,7 @@ namespace Bookshelf.Api
             services.AddControllers();
         }
 
-        private void AddSwagger(IServiceCollection services)
+        private static void AddSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {

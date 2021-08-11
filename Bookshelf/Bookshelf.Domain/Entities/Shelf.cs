@@ -1,6 +1,5 @@
 ﻿using Bookshelf.Domain.Common;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Bookshelf.Domain.Entities

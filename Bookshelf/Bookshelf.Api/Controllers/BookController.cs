@@ -1,10 +1,12 @@
-﻿using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
+﻿using Bookshelf.Application.Features.Books.Commands.AddBook;
+using Bookshelf.Application.Features.Books.Commands.DeleteBook;
+using Bookshelf.Application.Features.Books.Commands.UpdateBook;
+using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
 using Bookshelf.Application.Features.Books.Queries.GetBookDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bookshelf.Api.Controllers
@@ -20,13 +22,8 @@ namespace Bookshelf.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("test")]
-        public IActionResult Test()
-        {
-            var dto = "Hejka naklejka";
-            return Ok(dto);
-        }
 
+        // Queries
         [HttpGet("all")]
         public async Task<ActionResult<List<BookVm>>> GetAllBooks()
         {
@@ -39,6 +36,30 @@ namespace Bookshelf.Api.Controllers
         {
             var query = new GetBookDetailsQuery() { Id = id };
             return Ok(await _mediator.Send(query));
+        }
+
+        // Commands
+
+        [HttpPost(Name = "AddBook")]
+        public async Task<ActionResult<Guid>> Create([FromBody] AddBookCommand addBookCommand)
+        {
+            var id = await _mediator.Send(addBookCommand);
+            return Ok(id);
+        }
+
+        [HttpPut(Name = "UpdateBook")]
+        public async Task<ActionResult> Update([FromBody] UpdateBookCommand updateBookCommand)
+        {
+            await _mediator.Send(updateBookCommand);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}", Name = "DeleteBook")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var deleteBookCommand = new DeleteBookCommand() { Id = id };
+            await _mediator.Send(deleteBookCommand);
+            return NoContent();
         }
     }
 }
