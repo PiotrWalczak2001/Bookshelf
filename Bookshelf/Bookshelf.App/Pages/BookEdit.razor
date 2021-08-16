@@ -2,41 +2,42 @@
 @page "/bookedit/{BookId}"
 
 <section>
-    <h1>@bookDetails.Title</h1>
-    <EditForm Model="@bookDetails" OnValidSubmit="@HandleValidSubmit">
+    <h1>@Book.Title</h1>
+    <EditForm Model="@Book" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="form-group row">
             <label for="title" class="col-sm-3">Title:</label>
-            <InputText id="title" class="form-control col-sm-8" @bind-Value="@bookDetails.Title" placeholder="Enter title"></InputText>
+            <InputText id="title" class="form-control col-sm-8" @bind-Value="@Book.Title" placeholder="Enter title"></InputText>
         </div>
 
         <div class="form-group row">
             <label for="title" class="col-sm-3">Author:</label>
-            <InputText id="author" class="form-control col-sm-8" @bind-Value="@bookDetails.Author" placeholder="Enter author"></InputText>
+            <InputText id="author" class="form-control col-sm-8" @bind-Value="@Book.Author" placeholder="Enter author"></InputText>
         </div>
 
         <div class="form-group row">
             <label for="title" class="col-sm-3">Category:</label>
-            <InputText id="category" class="form-control col-sm-8" @bind-Value="@bookDetails.Category" placeholder="Enter category"></InputText>
+            <InputText id="category" class="form-control col-sm-8" @bind-Value="@Book.Category" placeholder="Enter category"></InputText>
         </div>
 
         <div class="form-group row">
             <label for="title" class="col-sm-3">Description:</label>
-            <InputTextArea id="description" class="form-control col-sm-8" @bind-Value="@bookDetails.Description" placeholder="Enter description"></InputTextArea>
+            <InputTextArea id="description" class="form-control col-sm-8" @bind-Value="@Book.Description" placeholder="Enter description"></InputTextArea>
         </div>
 
         <div class="form-group row">
             <label for="title" class="col-sm-3">Cover image:</label>
-            <InputText id="category" class="form-control col-sm-8" @bind-Value="@bookDetails.CoverImageUrl" placeholder="Enter URL path"></InputText>
+            <InputText id="category" class="form-control col-sm-8" @bind-Value="@Book.CoverImageUrl" placeholder="Enter URL path"></InputText>
         </div>
 
         <div class="form-group row">
             <label for="title" class="col-sm-3">Release date:</label>
-            <InputDate id="releasedate" class="form-control col-sm-8" @bind-Value="@bookDetails.ReleaseDate" placeholder="Enter release date"></InputDate>
+            <InputDate id="releasedate" class="form-control col-sm-8" @bind-Value="@Book.ReleaseDate" placeholder="Enter release date"></InputDate>
         </div>
 
         <button type="submit" class="btn btn-primary">Save book</button>
+        <button class="btn btn-danger" @onclick="@DeleteBook">Delete</button>
 
     </EditForm>
 </section>

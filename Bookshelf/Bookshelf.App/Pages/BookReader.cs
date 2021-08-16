@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Bookshelf.App.Pages
 {
-    public partial class BookDetails
+    public partial class BookReader
     {
+        [Inject]
+        public IBookDataService BookDataService { get; set; }
         [Parameter]
         public string BookId { get; set; }
         public BookDetailsViewModel Book { get; set; } = new();
-        [Inject]
-        public IBookDataService BookDataService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            Book = await BookDataService.GetBookDetails(Guid.Parse(BookId));
+           Book = await BookDataService.GetBookDetails(Guid.Parse(BookId));
         }
     }
 }

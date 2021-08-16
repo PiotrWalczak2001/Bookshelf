@@ -14,32 +14,37 @@ namespace Bookshelf.App.Pages
         public IBookDataService BookDataService { get; set; }
         [Parameter]
         public string BookId { get; set; }
-        public BookDetailsViewModel bookDetails { get; set; } = new BookDetailsViewModel();
+        public BookDetailsViewModel Book { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
             if(string.IsNullOrEmpty(BookId))
             {
-                bookDetails = new BookDetailsViewModel { ReleaseDate = DateTime.Now, CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png" };
+                Book = new BookDetailsViewModel { ReleaseDate = DateTime.Now, CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png" };
             }
             else
             {
-                bookDetails = await BookDataService.GetBookDetails(Guid.Parse(BookId));
+                Book = await BookDataService.GetBookDetails(Guid.Parse(BookId));
             }
         }
 
         protected async Task HandleValidSubmit()
         {
-            if(bookDetails.Id == Guid.Empty)
+            if(Book.Id == Guid.Empty)
             {
-                bookDetails.Id = Guid.NewGuid();
-                await BookDataService.AddBook(bookDetails);
+                Book.Id = Guid.NewGuid();
+                await BookDataService.AddBook(Book);
             }
             else
             {
-                await BookDataService.UpdateBook(bookDetails);
+                await BookDataService.UpdateBook(Book);
             }
                 
+        }
+
+        protected async Task DeleteBook()
+        {
+            await BookDataService.DeleteBook(Book.Id);
         }
     }
 }
