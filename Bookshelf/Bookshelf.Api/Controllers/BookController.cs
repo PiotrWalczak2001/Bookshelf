@@ -40,21 +40,21 @@ namespace Bookshelf.Api.Controllers
 
         // Commands
 
-        [HttpPost(Name = "AddBook")]
-        public async Task<ActionResult<Guid>> Create([FromBody] AddBookCommand addBookCommand)
+        [HttpPost]
+        public async Task<ActionResult<Guid>> Add([FromBody] AddBookCommand addBookCommand)
         {
             var id = await _mediator.Send(addBookCommand);
             return Ok(id);
         }
 
-        [HttpPut(Name = "UpdateBook")]
+        [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateBookCommand updateBookCommand)
         {
             await _mediator.Send(updateBookCommand);
             return NoContent();
         }
 
-        [HttpDelete("{id}", Name = "DeleteBook")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteBookCommand = new DeleteBookCommand() { Id = id };

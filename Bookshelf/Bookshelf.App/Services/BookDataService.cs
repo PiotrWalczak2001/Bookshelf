@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Bookshelf.App.Services
@@ -19,28 +20,42 @@ namespace Bookshelf.App.Services
 
         public async Task<IEnumerable<BooksListViewModel>> GetAllBooks()
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<BooksListViewModel>>($"book/all");   
+            // return await _httpClient.GetFromJsonAsync<IEnumerable<BooksListViewModel>>($"book/all");   
+            return await JsonSerializer.DeserializeAsync<IEnumerable<BooksListViewModel>>
+                     (await _httpClient.GetStreamAsync($"book/all"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
-        public Task<BookDetailsViewModel> GetBookDetails(Guid bookId)
+        public async Task<BookDetailsViewModel> GetBookDetails(Guid bookId)
         {
-            throw new NotImplementedException();
+            return await JsonSerializer.DeserializeAsync<BookDetailsViewModel>
+                (await _httpClient.GetStreamAsync($"book/details/{bookId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }   
+
+
+
+        public async Task<Guid> AddBook(BookDetailsViewModel newBook)
+        {
+            var bookJson = new StringContent(JsonSerializer.Serialize(newBook), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("book", bookJson);
+
+            if(response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync());
+            }
+            return Guid.Empty;
         }
 
-
-
-        public Task<BookDetailsViewModel> AddBook(BookDetailsViewModel newBook)
+        public async Task UpdateBook(BookDetailsViewModel bookToUpdate)
         {
-            throw new NotImplementedException();
-        }
-        public Task UpdateBook(BookDetailsViewModel bookToUpdate)
-        {
-            throw new NotImplementedException();
+            var bookJson = new StringContent(JsonSerializer.Serialize(bookToUpdate), Encoding.UTF8, "application/json");
+
+            await _httpClient.PutAsync("book", bookJson);
         }
 
-        public Task DeleteBook(Guid bookId)
+        public async Task DeleteBook(Guid bookId)
         {
-            throw new NotImplementedException();
+            await _httpClient.DeleteAsync($"book/{bookId}");
         }
 
 

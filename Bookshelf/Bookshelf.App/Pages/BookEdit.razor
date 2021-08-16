@@ -1,0 +1,42 @@
+﻿@page "/bookedit"
+@page "/bookedit/{BookId}"
+
+<section>
+    <h1>@bookDetails.Title</h1>
+    <EditForm Model="@bookDetails" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group row">
+            <label for="title" class="col-sm-3">Title:</label>
+            <InputText id="title" class="form-control col-sm-8" @bind-Value="@bookDetails.Title" placeholder="Enter title"></InputText>
+        </div>
+
+        <div class="form-group row">
+            <label for="title" class="col-sm-3">Author:</label>
+            <InputText id="author" class="form-control col-sm-8" @bind-Value="@bookDetails.Author" placeholder="Enter author"></InputText>
+        </div>
+
+        <div class="form-group row">
+            <label for="title" class="col-sm-3">Category:</label>
+            <InputText id="category" class="form-control col-sm-8" @bind-Value="@bookDetails.Category" placeholder="Enter category"></InputText>
+        </div>
+
+        <div class="form-group row">
+            <label for="title" class="col-sm-3">Description:</label>
+            <InputTextArea id="description" class="form-control col-sm-8" @bind-Value="@bookDetails.Description" placeholder="Enter description"></InputTextArea>
+        </div>
+
+        <div class="form-group row">
+            <label for="title" class="col-sm-3">Cover image:</label>
+            <InputText id="category" class="form-control col-sm-8" @bind-Value="@bookDetails.CoverImageUrl" placeholder="Enter URL path"></InputText>
+        </div>
+
+        <div class="form-group row">
+            <label for="title" class="col-sm-3">Release date:</label>
+            <InputDate id="releasedate" class="form-control col-sm-8" @bind-Value="@bookDetails.ReleaseDate" placeholder="Enter release date"></InputDate>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save book</button>
+
+    </EditForm>
+</section>

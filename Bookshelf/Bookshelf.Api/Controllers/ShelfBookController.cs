@@ -18,14 +18,14 @@ namespace Bookshelf.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost(Name = "AddShelfBook")]
+        [HttpPost]
         public async Task<ActionResult<Guid>> Add([FromBody] AddBookToShelfCommand addBookShelfCommand)
         {
             var id = await _mediator.Send(addBookShelfCommand);
             return Ok(id);
         }
 
-        [HttpDelete("{id}", Name = "DeleteShelfBook")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteBookFromShelfCommand = new RemoveBookFromShelfCommand() { Id = id };

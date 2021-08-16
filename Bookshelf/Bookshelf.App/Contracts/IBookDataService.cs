@@ -9,7 +9,7 @@ namespace Bookshelf.App.Services
     {
         Task<IEnumerable<BooksListViewModel>> GetAllBooks();
         Task<BookDetailsViewModel> GetBookDetails(Guid bookId);
-        Task<BookDetailsViewModel> AddBook(BookDetailsViewModel newBook);
+        Task<Guid> AddBook(BookDetailsViewModel newBook);
         Task UpdateBook(BookDetailsViewModel bookToUpdate);
         Task DeleteBook(Guid bookId);
     }

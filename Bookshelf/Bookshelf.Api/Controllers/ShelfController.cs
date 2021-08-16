@@ -41,21 +41,21 @@ namespace Bookshelf.Api.Controllers
 
         // Commands
 
-        [HttpPost(Name = "AddShelf")]
+        [HttpPost]
         public async Task<ActionResult<Guid>> Add([FromBody] AddShelfCommand addShelfCommand)
         {
             var id = await _mediator.Send(addShelfCommand);
             return Ok(id);
         }
 
-        [HttpPut(Name = "UpdateShelf")]
+        [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateShelfCommand updateShelfCommand)
         {
             await _mediator.Send(updateShelfCommand);
             return NoContent();
         }
 
-        [HttpDelete("{id}", Name = "DeleteShelf")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteShelfCommand = new DeleteShelfCommand() { Id = id };
