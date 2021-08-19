@@ -10,6 +10,7 @@ namespace Bookshelf.Application.Features.Books.Queries.GetBookDetails
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string CoverImageUrl { get; set; }
-        public string Category { get; set; }
+        public Guid CategoryId { get; set; }
+        public CategoryDto Category { get; set; }
     }
 }

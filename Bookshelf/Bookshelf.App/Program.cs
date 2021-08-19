@@ -1,3 +1,4 @@
+using Bookshelf.App.Contracts;
 using Bookshelf.App.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ namespace Bookshelf.App
             // builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             builder.Services.AddHttpClient<IBookDataService, BookDataService>(client => client.BaseAddress = new Uri("https://localhost:44307/"));
+            builder.Services.AddHttpClient<ICategoryDataService, CategoryDataService>(client => client.BaseAddress = new Uri("https://localhost:44307/"));
 
             //https://localhost:44307/
 

@@ -11,6 +11,6 @@ namespace Bookshelf.Application.Features.Books.Commands.UpdateBook
         public string CoverImageUrl { get; set; }
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public string Category { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

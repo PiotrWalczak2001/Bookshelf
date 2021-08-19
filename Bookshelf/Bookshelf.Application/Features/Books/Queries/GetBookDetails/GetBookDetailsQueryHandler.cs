@@ -10,15 +10,23 @@ namespace Bookshelf.Application.Features.Books.Queries.GetBookDetails
     {
         private readonly IMapper _mapper;
         private readonly IBookRepository _bookRepository;
-        public GetBookDetailsQueryHandler(IMapper mapper, IBookRepository bookRepository)
+        private readonly ICategoryRepository _categoryRepository;
+        public GetBookDetailsQueryHandler(IMapper mapper, IBookRepository bookRepository, ICategoryRepository categoryRepository)
         {
             _bookRepository = bookRepository;
             _mapper = mapper;
+            _categoryRepository = categoryRepository;
         }
         public async Task<BookDetailsVm> Handle(GetBookDetailsQuery request, CancellationToken cancellationToken)
         {
             var bookDetails = await _bookRepository.GetByIdAsync(request.Id);
-            return _mapper.Map<BookDetailsVm>(bookDetails);
+            var bookDetailsDto = _mapper.Map<BookDetailsVm>(bookDetails);
+            var category = await _categoryRepository.GetByIdAsync(bookDetails.CategoryId);
+
+
+            bookDetailsDto.Category = _mapper.Map<CategoryDto>(category);
+
+            return bookDetailsDto;
         }
     }
 }

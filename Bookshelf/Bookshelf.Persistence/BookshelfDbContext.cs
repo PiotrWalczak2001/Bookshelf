@@ -13,6 +13,7 @@ namespace Bookshelf.Persistence
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Shelf> Shelves { get; set; }
         public DbSet<ShelfBook> ShelfBooks { get; set; }
 
@@ -22,6 +23,29 @@ namespace Bookshelf.Persistence
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookshelfDbContext).Assembly);
 
+            modelBuilder.Entity<Category>().HasData(new Category {
+                Id = Guid.Parse("10EB0FDB-75B4-4C33-AE6A-D07721164738"),
+                Name = "Fantasy"
+            });
+
+            modelBuilder.Entity<Category>().HasData(new Category
+            {
+                Id = Guid.Parse("B86DC9BD-460D-4B39-B9F1-7E7DB294D89C"),
+                Name = "Crime"
+            });
+
+            modelBuilder.Entity<Category>().HasData(new Category
+            {
+                Id = Guid.Parse("C3F33488-8D6C-4323-918E-257818F73FD8"),
+                Name = "Biography"
+            });
+
+            modelBuilder.Entity<Category>().HasData(new Category
+            {
+                Id = Guid.Parse("CAC47B25-478E-451B-A921-02A8F1E2D3D0"),
+                Name = "Romance"
+            });
+
             modelBuilder.Entity<Book>().HasData(new Book
             {
                 Id = Guid.Parse("{BB76804E-2E80-4A1B-9015-D22B0AB7AA13}"),
@@ -29,7 +53,7 @@ namespace Bookshelf.Persistence
                 Author = "Andrzej Sapkowski",
                 Description = "The Last Wish - is the first (in its fictional chronology; published second in original Polish) of the two collections of short stories (the other being Sword of Destiny) preceding the main Witcher Saga, written by Polish fantasy writer Andrzej Sapkowski.",
                 CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
-                Category = "Fantasy"
+                CategoryId = Guid.Parse("10EB0FDB-75B4-4C33-AE6A-D07721164738")
             });
             modelBuilder.Entity<Book>().HasData(new Book
             {
@@ -38,7 +62,7 @@ namespace Bookshelf.Persistence
                 Author = "Andrzej Sapkowski",
                 Description = "is the second (in its fictional chronology; first in Polish print) of the two collections of short stories (the other being The Last Wish), both preceding the main Witcher Saga. The stories were written by Polish fantasy author Andrzej Sapkowski.",
                 CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
-                Category = "Fantasy"
+                CategoryId = Guid.Parse("10EB0FDB-75B4-4C33-AE6A-D07721164738")
             });
 
             modelBuilder.Entity<Book>().HasData(new Book
@@ -48,7 +72,7 @@ namespace Bookshelf.Persistence
                 Author = "Author1",
                 Description = "Description1",
                 CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
-                Category = "Crime"
+                CategoryId = Guid.Parse("B86DC9BD-460D-4B39-B9F1-7E7DB294D89C")
             });
 
             modelBuilder.Entity<Book>().HasData(new Book
@@ -58,7 +82,7 @@ namespace Bookshelf.Persistence
                 Author = "Author1",
                 Description = "Description2",
                 CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
-                Category = "Biography"
+                CategoryId = Guid.Parse("C3F33488-8D6C-4323-918E-257818F73FD8")
             });
 
             modelBuilder.Entity<Book>().HasData(new Book
@@ -68,7 +92,7 @@ namespace Bookshelf.Persistence
                 Author = "Author2",
                 Description = "Description3",
                 CoverImageUrl = "https://cdn.pixabay.com/photo/2017/05/03/21/16/book-2282152_960_720.png",
-                Category = "Romance"
+                CategoryId = Guid.Parse("CAC47B25-478E-451B-A921-02A8F1E2D3D0")
             });
 
             modelBuilder.Entity<Shelf>().HasData(new Shelf

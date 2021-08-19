@@ -19,6 +19,7 @@ namespace Bookshelf.Persistence
 
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IShelfRepository, ShelfRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             return services;
         }

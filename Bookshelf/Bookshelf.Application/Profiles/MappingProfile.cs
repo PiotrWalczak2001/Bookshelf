@@ -3,6 +3,9 @@ using Bookshelf.Application.Features.Books.Commands.AddBook;
 using Bookshelf.Application.Features.Books.Commands.UpdateBook;
 using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
 using Bookshelf.Application.Features.Books.Queries.GetBookDetails;
+using Bookshelf.Application.Features.Categories.Commands.AddCategory;
+using Bookshelf.Application.Features.Categories.Queries.GetAllCategories;
+using Bookshelf.Application.Features.Categories.Queries.GetCategoryById;
 using Bookshelf.Application.Features.Shelves.Commands.AddBookToShelf;
 using Bookshelf.Application.Features.Shelves.Commands.AddShelf;
 using Bookshelf.Application.Features.Shelves.Commands.UpdateShelf;
@@ -31,7 +34,14 @@ namespace Bookshelf.Application.Profiles
             CreateMap<Shelf, AddShelfCommand>().ReverseMap();
             CreateMap<Shelf, UpdateShelfCommand>().ReverseMap();
 
+            // categories
+            CreateMap<Category, CategoryVm>().ReverseMap();
+            CreateMap<Category, CategoryDetailsVm>().ReverseMap();
+            CreateMap<Category, CategoryDto>();
 
+            CreateMap<Category, AddCategoryCommand>().ReverseMap();
+
+            //shelfbook
             CreateMap<ShelfBook, AddBookToShelfCommand>().ReverseMap();
 
         }

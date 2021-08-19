@@ -12,6 +12,7 @@ namespace Bookshelf.App.Pages
     {
         [Inject]
         public IBookDataService BookDataService { get; set; }
+
         [Parameter]
         public string BookId { get; set; }
         public BookDetailsViewModel Book { get; set; } = new();
@@ -20,5 +21,7 @@ namespace Bookshelf.App.Pages
         {
            Book = await BookDataService.GetBookDetails(Guid.Parse(BookId));
         }
+
+
     }
 }
