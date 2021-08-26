@@ -1,4 +1,5 @@
 ﻿using Bookshelf.Application.Contracts.Persistence;
+using Bookshelf.Application.Contracts.Persistence.Identity;
 using Bookshelf.Persistence.Identity;
 using Bookshelf.Persistence.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,7 @@ namespace Bookshelf.Persistence
         {
             services.AddDbContext<BookshelfDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("BookshelfConnectionString")));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<BookshelfDbContext>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
