@@ -4,6 +4,7 @@ using Bookshelf.Application.Features.Books.Commands.UpdateBook;
 using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
 using Bookshelf.Application.Features.Books.Queries.GetBookDetails;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Bookshelf.Api.Controllers
 
         // Queries
         [HttpGet("all")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<BookVm>>> GetAllBooks()
         {
             var dtos = await _mediator.Send(new GetAllBooksQuery());
@@ -32,6 +34,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpGet("details/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<BookDetailsVm>> GetBookById(Guid id)
         {
             var query = new GetBookDetailsQuery() { Id = id };
@@ -41,6 +44,7 @@ namespace Bookshelf.Api.Controllers
         // Commands
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Add([FromBody] AddBookCommand addBookCommand)
         {
             var id = await _mediator.Send(addBookCommand);
@@ -48,6 +52,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult> Update([FromBody] UpdateBookCommand updateBookCommand)
         {
             await _mediator.Send(updateBookCommand);
@@ -55,6 +60,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteBookCommand = new DeleteBookCommand() { Id = id };

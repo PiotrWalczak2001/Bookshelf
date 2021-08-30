@@ -15,10 +15,9 @@ else
     <thead>
         <tr>
             <th></th>
-            <th>Book ID</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Category ID</th>
+            <th>Category</th>
             <th></th>
         </tr>
     </thead>
@@ -27,10 +26,9 @@ else
         {
             <tr>    
                 <td><img src="@book.CoverImageUrl" width="75" /></td>
-                <td>@book.Id</td>
                 <td>@book.Title</td>
                 <td>@book.Author</td>
-                <td>@book.CategoryId</td>
+                <td>@book.Category.Name</td>
                 <td>
                     <a href="@($"bookreader/{book.Id}")" class="btn btn-success">Read</a>
                     <a href="@($"bookdetails/{book.Id}")" class="btn btn-primary">Details</a>

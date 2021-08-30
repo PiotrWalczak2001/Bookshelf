@@ -3,6 +3,7 @@ using Bookshelf.Application.Features.Categories.Commands.DeleteCategory;
 using Bookshelf.Application.Features.Categories.Queries.GetAllCategories;
 using Bookshelf.Application.Features.Categories.Queries.GetCategoryById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpGet("all")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<CategoryVm>>> GetAllCategories()
         {
             var dtos = await _mediator.Send(new GetAllCategoriesQuery());
@@ -30,6 +32,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpGet("details/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CategoryDetailsVm>> GetCategoryById(Guid id)
         {
             var query = new GetCategoryDetailsQuery() { Id = id };
@@ -37,6 +40,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Add([FromBody] AddCategoryCommand addCategoryCommand)
         {
             var id = await _mediator.Send(addCategoryCommand);
@@ -44,6 +48,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteCategoryCommand = new DeleteCategoryCommand() { Id = id };

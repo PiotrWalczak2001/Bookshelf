@@ -1,4 +1,5 @@
-﻿using Bookshelf.App.Services;
+﻿using Bookshelf.App.Contracts;
+using Bookshelf.App.Services;
 using Bookshelf.App.ViewModels;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
@@ -13,11 +14,17 @@ namespace Bookshelf.App.Pages
 
         [Inject]
         public IBookDataService BookDataService { get; set; }
+        [Inject]
+        public ICategoryDataService CategoryDataService {get; set;}
 
         protected async override Task OnInitializedAsync()
         {
             Books = (await BookDataService.GetAllBooks()).ToList();
-            
+            foreach (var book in Books)
+            {
+                book.Category = await CategoryDataService.GetCategoryDetails(book.CategoryId);
+            }
+                
         }
     }
 }
