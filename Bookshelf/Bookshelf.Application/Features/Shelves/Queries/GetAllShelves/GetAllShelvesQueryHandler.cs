@@ -19,7 +19,7 @@ namespace Bookshelf.Application.Features.Shelves.Queries.GetAllShelves
         }
         public async Task<List<ShelfVm>> Handle(GetAllShelvesQuery request, CancellationToken cancellationToken)
         {
-            var allShelves = (await _shelfRepository.ListAllAsync()).OrderBy(s => s.Name); // actually name later by user
+            var allShelves = await _shelfRepository.GetAllUserShelves(request.UserId);
             return _mapper.Map<List<ShelfVm>>(allShelves);
         }
     }

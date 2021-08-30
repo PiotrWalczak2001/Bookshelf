@@ -1,5 +1,6 @@
 ﻿using Bookshelf.Application.Contracts.Persistence;
 using Bookshelf.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Bookshelf.Persistence.Repositories
 
         public async Task<IEnumerable<ShelfBook>> GetAllBooksFromShelf(Guid ShelfId)
         {
-            var booksFromShelf = _dbContext.ShelfBooks.Where(sb => sb.ShelfId == ShelfId);
+            var booksFromShelf = await _dbContext.ShelfBooks.Where(sb => sb.ShelfId == ShelfId).ToListAsync();
 
             return booksFromShelf;
         }
@@ -43,6 +44,12 @@ namespace Bookshelf.Persistence.Repositories
         {
             _dbContext.ShelfBooks.Remove((await _dbContext.ShelfBooks.FindAsync(ShelfBookId)));
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Shelf>> GetAllUserShelves(Guid UserId)
+        {
+            var userShelves = await _dbContext.Shelves.Where(p => p.UserId == UserId).ToListAsync();
+            return userShelves;
         }
     }
 }

@@ -3,8 +3,8 @@ using Bookshelf.Application.Features.Shelves.Commands.AddShelf;
 using Bookshelf.Application.Features.Shelves.Commands.DeleteShelf;
 using Bookshelf.Application.Features.Shelves.Commands.RemoveBookFromShelf;
 using Bookshelf.Application.Features.Shelves.Commands.UpdateShelf;
-using Bookshelf.Application.Features.Shelves.Queries.GetAllBooksFromShelf;
 using Bookshelf.Application.Features.Shelves.Queries.GetAllShelves;
+using Bookshelf.Application.Features.Shelves.Queries.GetShelf;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,20 +27,19 @@ namespace Bookshelf.Api.Controllers
 
         // Queries
 
-        [HttpGet("all")]
+        [HttpGet("all/{userId}")]
         [Authorize]
-        public async Task<ActionResult<List<ShelfVm>>> GetAllShelves()
+        public async Task<ActionResult<List<ShelfVm>>> GetAllShelves(Guid userId)
         {
-            var dtos = await _mediator.Send(new GetAllShelvesQuery());
-            return Ok(dtos);
+            var query = new GetAllShelvesQuery() { UserId = userId };
+            return Ok(await _mediator.Send(query));
         }
 
-        // getting books from shelf
-        [HttpGet("booksfromshelf/{id}")]
+        [HttpGet("{shelfId}")]
         [Authorize]
-        public async Task<ActionResult<ShelfWithBooksVm>> GetAllBooksFromShelf(Guid id)
+        public async Task<ActionResult<ShelfDetailsVm>> GetShelfDetails(Guid shelfId)
         {
-            var query = new GetAllBooksFromShelfQuery() { Id = id };
+            var query = new GetShelfQuery() { ShelfId = shelfId };
             return Ok(await _mediator.Send(query));
         }
 

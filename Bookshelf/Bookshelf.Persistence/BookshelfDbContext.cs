@@ -98,14 +98,14 @@ namespace Bookshelf.Persistence
             modelBuilder.Entity<Shelf>().HasData(new Shelf
             {
                Id = Guid.Parse("{D7A45328-D6F1-4998-A93A-4785CDD415D2}"),
-               UserId = Guid.Parse("{925433D2-557E-45EE-8D84-017918A2D760}"),
+               UserId = Guid.Parse("{6635BDAE-7604-4E98-9BE3-A67618167CFF}"),
                Name = "Favorite"
             });
 
             modelBuilder.Entity<Shelf>().HasData(new Shelf
             {
                 Id = Guid.Parse("{7022434D-0913-42E5-98AD-1DB0F1A45DD4}"),
-                UserId = Guid.Parse("{925433D2-557E-45EE-8D84-017918A2D760}"),
+                UserId = Guid.Parse("{6635BDAE-7604-4E98-9BE3-A67618167CFF}"),
                 Name = "To read"
             });
 
