@@ -13,5 +13,11 @@ namespace Bookshelf.Persistence.Repositories
         public CategoryRepository(BookshelfDbContext dbContext) : base(dbContext)
         {
         }
+
+        public Task<bool> IsCategoryUnique(string name)
+        {
+            var matchingCategories = _dbContext.Categories.Any(c => c.Name.Equals(name));
+            return Task.FromResult(matchingCategories);
+        }
     }
 }

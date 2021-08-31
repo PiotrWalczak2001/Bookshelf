@@ -19,6 +19,12 @@ namespace Bookshelf.Application.Features.Shelves.Commands.AddBookToShelf
         }
         public async Task<Guid> Handle(AddBookToShelfCommand request, CancellationToken cancellationToken)
         {
+            var validator = new AddBookToShelfCommandValidator(_shelfRepository);
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (validationResult.Errors.Count > 0)
+                throw new Exceptions.ValidationException(validationResult);
+
             var bookToAdd = _mapper.Map<ShelfBook>(request);
             await _shelfRepository.AddBookToShelf(bookToAdd);
             return bookToAdd.Id;

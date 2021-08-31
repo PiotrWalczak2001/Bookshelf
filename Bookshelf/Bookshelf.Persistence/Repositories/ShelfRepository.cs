@@ -51,5 +51,17 @@ namespace Bookshelf.Persistence.Repositories
             var userShelves = await _dbContext.Shelves.Where(p => p.UserId == UserId).ToListAsync();
             return userShelves;
         }
+
+        public Task<bool> IsShelfUnique(string name, Guid userId)
+        {
+            var matchingShelves = _dbContext.Shelves.Any(s => s.Name.Equals(name) && s.UserId.Equals(userId));
+            return Task.FromResult(matchingShelves);
+        }
+
+        public Task<bool> IsShelfBookUnique(Guid shelfId, Guid bookId)
+        {
+            var matchingShelfBooks = _dbContext.ShelfBooks.Any(sb => sb.ShelfId.Equals(shelfId) && sb.BookId.Equals(bookId));
+            return Task.FromResult(matchingShelfBooks);
+        }
     }
 }

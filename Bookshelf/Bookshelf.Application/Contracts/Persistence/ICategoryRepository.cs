@@ -9,5 +9,6 @@ namespace Bookshelf.Application.Contracts.Persistence
 {
     public interface ICategoryRepository : IAsyncRepository<Category>
     {
+        Task<bool> IsCategoryUnique(string name);
     }
 }

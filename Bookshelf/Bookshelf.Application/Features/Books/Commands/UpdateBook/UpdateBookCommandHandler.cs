@@ -19,6 +19,12 @@ namespace Bookshelf.Application.Features.Books.Commands.UpdateBook
 
         public async Task<Unit> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
         {
+            var validator = new UpdateBookCommandValidator(_bookRepository);
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (validationResult.Errors.Count > 0)
+                throw new Exceptions.ValidationException(validationResult);
+
             var bookToUpdate = await _bookRepository.GetByIdAsync(request.Id);
 
             _mapper.Map(request, bookToUpdate, typeof(UpdateBookCommand), typeof(Book));
