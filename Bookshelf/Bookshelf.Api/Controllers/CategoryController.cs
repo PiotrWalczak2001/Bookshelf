@@ -4,16 +4,16 @@ using Bookshelf.Application.Features.Categories.Queries.GetAllCategories;
 using Bookshelf.Application.Features.Categories.Queries.GetCategoryById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bookshelf.Api.Controllers
 {
     [ApiController]
-    [Route("category")]
+    [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,15 +23,17 @@ namespace Bookshelf.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("all")]
+        [HttpGet("all", Name ="GetAllCategories")]
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<List<CategoryVm>>> GetAllCategories()
         {
             var dtos = await _mediator.Send(new GetAllCategoriesQuery());
             return Ok(dtos);
         }
 
-        [HttpGet("details/{id}")]
+        [HttpGet("details/{id}", Name ="GetCategoryDetails")]
         [AllowAnonymous]
         public async Task<ActionResult<CategoryDetailsVm>> GetCategoryById(Guid id)
         {
@@ -39,7 +41,7 @@ namespace Bookshelf.Api.Controllers
             return Ok(await _mediator.Send(query));
         }
 
-        [HttpPost]
+        [HttpPost(Name ="AddCategory")]
         [Authorize]
         public async Task<ActionResult<Guid>> Add([FromBody] AddCategoryCommand addCategoryCommand)
         {
@@ -47,8 +49,11 @@ namespace Bookshelf.Api.Controllers
             return Ok(id);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name ="DeleteCategory")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteCategoryCommand = new DeleteCategoryCommand() { Id = id };

@@ -5,6 +5,7 @@ using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
 using Bookshelf.Application.Features.Books.Queries.GetBookDetails;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace Bookshelf.Api.Controllers
 {
     [ApiController]
-    [Route("book")]
+    [Route("api/[controller]")]
     public class BookController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -25,15 +26,17 @@ namespace Bookshelf.Api.Controllers
 
 
         // Queries
-        [HttpGet("all")]
+        [HttpGet("all", Name ="GetAllBooks")]
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<List<BookVm>>> GetAllBooks()
         {
             var dtos = await _mediator.Send(new GetAllBooksQuery());
             return Ok(dtos);
         }
 
-        [HttpGet("details/{id}")]
+        [HttpGet("details/{id}", Name ="GetBookDetails")]
         [AllowAnonymous]
         public async Task<ActionResult<BookDetailsVm>> GetBookById(Guid id)
         {
@@ -43,7 +46,7 @@ namespace Bookshelf.Api.Controllers
 
         // Commands
 
-        [HttpPost]
+        [HttpPost(Name ="AddBook")]
         [Authorize]
         public async Task<ActionResult<Guid>> Add([FromBody] AddBookCommand addBookCommand)
         {
@@ -51,16 +54,22 @@ namespace Bookshelf.Api.Controllers
             return Ok(id);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateBook")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateBookCommand updateBookCommand)
         {
             await _mediator.Send(updateBookCommand);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name ="DeleteBook")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteBookCommand = new DeleteBookCommand() { Id = id };

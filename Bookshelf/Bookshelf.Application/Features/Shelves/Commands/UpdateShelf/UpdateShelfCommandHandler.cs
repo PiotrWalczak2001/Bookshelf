@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bookshelf.Application.Contracts.Persistence;
+using Bookshelf.Application.Exceptions;
 using Bookshelf.Domain.Entities;
 using MediatR;
 using System.Threading;
@@ -18,13 +19,19 @@ namespace Bookshelf.Application.Features.Shelves.Commands.UpdateShelf
         }
         public async Task<Unit> Handle(UpdateShelfCommand request, CancellationToken cancellationToken)
         {
+            var shelfToUpdate = await _shelfRepository.GetByIdAsync(request.Id);
+
+            if (shelfToUpdate == null)
+            {
+                throw new NotFoundException(nameof(Shelf), request.Id);
+            }
+
             var validator = new UpdateShelfCommandValidator(_shelfRepository);
             var validationResult = await validator.ValidateAsync(request);
 
             if (validationResult.Errors.Count > 0)
                 throw new Exceptions.ValidationException(validationResult);
 
-            var shelfToUpdate = await _shelfRepository.GetByIdAsync(request.Id);
 
             _mapper.Map(request, shelfToUpdate, typeof(UpdateShelfCommand), typeof(Shelf));
 

@@ -7,6 +7,7 @@ using Bookshelf.Application.Features.Shelves.Queries.GetAllShelves;
 using Bookshelf.Application.Features.Shelves.Queries.GetShelf;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 namespace Bookshelf.Api.Controllers
 {
     [ApiController]
-    [Route("shelf")]
+    [Route("api/[controller]")]
     public class ShelfController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -27,15 +28,17 @@ namespace Bookshelf.Api.Controllers
 
         // Queries
 
-        [HttpGet("all/{userId}")]
+        [HttpGet("all/{userId}", Name ="GetAllShalves")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<List<ShelfVm>>> GetAllShelves(Guid userId)
         {
             var query = new GetAllShelvesQuery() { UserId = userId };
             return Ok(await _mediator.Send(query));
         }
 
-        [HttpGet("{shelfId}")]
+        [HttpGet("{shelfId}", Name ="GetShelfDetails")]
         [Authorize]
         public async Task<ActionResult<ShelfDetailsVm>> GetShelfDetails(Guid shelfId)
         {
@@ -45,7 +48,7 @@ namespace Bookshelf.Api.Controllers
 
         // Commands
 
-        [HttpPost]
+        [HttpPost(Name ="AddShelf")]
         [Authorize]
         public async Task<ActionResult<Guid>> Add([FromBody] AddShelfCommand addShelfCommand)
         {
@@ -53,16 +56,22 @@ namespace Bookshelf.Api.Controllers
             return Ok(id);
         }
 
-        [HttpPut]
+        [HttpPut(Name ="UpdateShelf")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateShelfCommand updateShelfCommand)
         {
             await _mediator.Send(updateShelfCommand);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name ="DeleteShelf")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(Guid id)
         {
             var deleteShelfCommand = new DeleteShelfCommand() { Id = id };

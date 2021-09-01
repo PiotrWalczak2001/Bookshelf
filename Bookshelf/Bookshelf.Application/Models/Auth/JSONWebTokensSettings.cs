@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bookshelf.Application.Models
+﻿namespace Bookshelf.Application.Models
 {
     public class JSONWebTokensSettings
     {

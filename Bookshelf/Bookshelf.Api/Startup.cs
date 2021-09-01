@@ -1,9 +1,8 @@
+using Bookshelf.Api.Middleware;
 using Bookshelf.Application;
 using Bookshelf.Persistence;
-using Bookshelf.Persistence.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -86,19 +85,22 @@ namespace Bookshelf.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("Open");
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
             app.UseRouting();
-            app.UseAuthorization();
-            
+            app.UseAuthentication();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bookshelf API");
             });
+
+            app.UseCustomExceptionHandler();
+
+            app.UseCors("Open");
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

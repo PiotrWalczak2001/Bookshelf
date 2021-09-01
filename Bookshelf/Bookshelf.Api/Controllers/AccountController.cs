@@ -1,15 +1,12 @@
 ﻿using Bookshelf.Application.Contracts.Persistence.Identity;
 using Bookshelf.Application.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bookshelf.Api.Controllers
 {
     [ApiController]
-    [Route("account")]
+    [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
