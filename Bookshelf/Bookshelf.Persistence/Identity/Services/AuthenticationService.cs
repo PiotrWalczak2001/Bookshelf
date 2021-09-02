@@ -60,6 +60,7 @@ namespace Bookshelf.Persistence.Identity
             var alreadyExistingUser = await _userManager.FindByNameAsync(request.UserName);
             var alreadyExistingEmail = await _userManager.FindByEmailAsync(request.Email);
 
+            var newId = Guid.NewGuid().ToString(); 
             if(alreadyExistingUser != null)
             {
                 throw new Exception("This username is already taken.");
@@ -70,7 +71,8 @@ namespace Bookshelf.Persistence.Identity
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                Id = newId
             };
 
             if(alreadyExistingEmail != null)
