@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blazored.LocalStorage;
 using BookShelf.App.Contracts;
 using BookShelf.App.ViewModels;
 using System;
@@ -9,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace BookShelf.App.Services
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : DataService, ICategoryService
     {
-        private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
-        public CategoryService(HttpClient httpClient, IMapper mapper)
+        public CategoryService(HttpClient httpClient, IMapper mapper, ILocalStorageService localStorage) : base(httpClient, localStorage)
         {
-            _httpClient = httpClient;
             _mapper = mapper;
         }
 
