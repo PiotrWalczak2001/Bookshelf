@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Api", "Bookshelf.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A5E340EA-2284-4974-A698-B0756C35487A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelf.App", "BookShelf.App\BookShelf.App.csproj", "{F71319F9-0CF1-46D5-9D57-2E1AF20320D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShelf.App", "BookShelf.App\BookShelf.App.csproj", "{F71319F9-0CF1-46D5-9D57-2E1AF20320D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshelf.Shared", "Bookshelf.Shared\Bookshelf.Shared.csproj", "{AB2B7B6E-ECCD-46BF-B869-D852EDF34D61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Shared", "Bookshelf.Shared\Bookshelf.Shared.csproj", "{AB2B7B6E-ECCD-46BF-B869-D852EDF34D61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
