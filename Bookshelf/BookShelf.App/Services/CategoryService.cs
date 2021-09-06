@@ -5,6 +5,7 @@ using BookShelf.App.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace BookShelf.App.Services
 
         public async Task<List<CategoryViewModel>> GetAll()
         {
+            await AddBearerToken();
             string relativeUri = $"{_httpClient.BaseAddress}/all";
 
             var categories = await JsonSerializer.DeserializeAsync<ICollection<CategoryViewModel>>(
@@ -32,6 +34,7 @@ namespace BookShelf.App.Services
 
         public async Task<CategoryViewModel> GetById(Guid Id)
         {
+            await AddBearerToken();
             string relativeUri = $"{_httpClient.BaseAddress}/details/{Id}";
 
             var category = await JsonSerializer.DeserializeAsync<CategoryViewModel>(
@@ -43,14 +46,27 @@ namespace BookShelf.App.Services
         }
 
 
-        public Task<Guid> Create(CategoryViewModel categoryViewModel)
+        public async Task<Guid> Create(CategoryViewModel categoryViewModel)
         {
-            throw new NotImplementedException();
+            await AddBearerToken();
+
+            string relativeUri = $"{_httpClient.BaseAddress}";
+            var categoryJson = new StringContent(JsonSerializer.Serialize(categoryViewModel), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync(relativeUri, categoryJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync());
+            }
+            return Guid.Empty;
         }
 
-        public Task Delete(Guid Id)
+        public async Task Delete(Guid Id)
         {
-            throw new NotImplementedException();
+            await AddBearerToken();
+            string relativeUri = $"{_httpClient.BaseAddress}/{Id}";
+            await _httpClient.DeleteAsync(relativeUri);
         }
     }
 }
