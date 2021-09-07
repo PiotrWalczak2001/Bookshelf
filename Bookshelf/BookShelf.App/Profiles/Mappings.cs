@@ -12,6 +12,11 @@ namespace BookShelf.App.Profiles
             CreateMap<Book, BookDetailViewModel>().ReverseMap();
 
             CreateMap<Category, CategoryViewModel>().ReverseMap();
+
+            CreateMap<Shelf, ShelfListViewModel>().ReverseMap();
+            CreateMap<Shelf, ShelfDetailViewModel>().ReverseMap();
+
+            CreateMap<ShelfBook, ShelfBookViewModel>().ReverseMap();
         }
     }
 }

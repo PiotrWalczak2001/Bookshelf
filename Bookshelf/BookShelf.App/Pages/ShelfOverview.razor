@@ -1,0 +1,32 @@
+﻿@page "/shelfoverview"
+
+<h1>Your shelves</h1>
+
+@if (Shelves == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <a href="@($"shelfedit")" class="btn btn-success">Create new shelf</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shelf in Shelves)
+            {
+                <tr>
+                    <td>@shelf.Name</td>
+                    <td>
+                        <a href="@($"shelfdetail/{shelf.Id}")" class="btn btn-primary">Details</a>
+                        <a href="@($"shelfedit/{shelf.Id}")" class="btn btn-warning">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

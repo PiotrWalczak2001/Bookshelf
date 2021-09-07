@@ -24,7 +24,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpGet("all", Name ="GetAllCategories")]
-        [Authorize]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult<List<CategoryVm>>> GetAllCategories()
@@ -34,7 +34,7 @@ namespace Bookshelf.Api.Controllers
         }
 
         [HttpGet("details/{id}", Name ="GetCategoryDetails")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<CategoryDetailsVm>> GetCategoryById(Guid id)
         {
             var query = new GetCategoryDetailsQuery() { Id = id };

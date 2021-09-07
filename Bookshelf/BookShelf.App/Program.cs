@@ -33,6 +33,7 @@ namespace BookShelf.App
 
             builder.Services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri(host, "api/book"));
             builder.Services.AddHttpClient<ICategoryService, CategoryService>(client => client.BaseAddress = new Uri(host, "api/category"));
+            builder.Services.AddHttpClient<IShelfService, ShelfService>(client => client.BaseAddress = new Uri(host, "api/shelf"));
             builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(client => client.BaseAddress = new Uri(host, "api/account"));
 
             await builder.Build().RunAsync();

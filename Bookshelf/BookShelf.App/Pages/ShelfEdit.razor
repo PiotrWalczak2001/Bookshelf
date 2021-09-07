@@ -1,0 +1,22 @@
+﻿@page "/shelfedit"
+@page "/shelfedit/{ShelfId}"
+
+<section>
+    @if (string.IsNullOrEmpty(ShelfId))
+    {
+        <h1>Create new shelf</h1>
+    }
+    else
+    {
+        <h1>Edit shelf</h1>
+    }
+    <EditForm Model="@Shelf" OnValidSubmit="@SendEdit">
+        <div class="form-group row">
+            <label for="name" class="col-sm-3">Name:</label>
+            <InputText id="name" class="form-control col-sm-8" @bind-Value="@Shelf.Name" placeholder="Enter shelf name"></InputText>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save shelf</button>
+
+    </EditForm>
+</section>

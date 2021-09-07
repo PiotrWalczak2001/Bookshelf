@@ -1,0 +1,37 @@
+﻿@page "/shelfdetail/{ShelfId}"
+
+<h1>@Shelf.Name</h1>
+<br />
+<h2>Books in shelf</h2>
+
+@if (ShelfBooks == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Author</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shelfbook in ShelfBooks)
+            {
+                <tr>
+                    <td><img src="@shelfbook.CoverImageUrl" width="75" /></td>
+                    <td>@shelfbook.Title</td>
+                    <td>@shelfbook.Author</td>
+                    <td>
+                        <a href="" class="btn btn-success">Read</a>
+                        <a href="@($"bookdetail/{shelfbook.BookId}")" class="btn btn-primary">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

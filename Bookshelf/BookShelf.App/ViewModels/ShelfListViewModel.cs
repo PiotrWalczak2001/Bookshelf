@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Bookshelf.Shared
+namespace BookShelf.App.ViewModels
 {
-    public class Shelf
+    public class ShelfListViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Guid UserId { get; set; }
-        public IEnumerable<ShelfBook> ShelfBooks { get; set; }
     }
 }

@@ -29,6 +29,12 @@ namespace BookShelf.App.Auth
 
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseTokenClaims(savedToken), "jwt")));
         }
+        public async Task<string> GetUserId()
+        {
+            var authState = await GetAuthenticationStateAsync();
+            var uidClaim = authState.User.Claims.First(p => p.Type == "uid");
+            return uidClaim.Value;
+        }
 
         public void SetUserAuthenticated(string email)
         {

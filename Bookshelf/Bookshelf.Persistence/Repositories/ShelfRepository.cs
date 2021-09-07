@@ -18,7 +18,6 @@ namespace Bookshelf.Persistence.Repositories
         public async Task<IEnumerable<ShelfBook>> GetAllBooksFromShelf(Guid ShelfId)
         {
             var booksFromShelf = await _dbContext.ShelfBooks.Where(sb => sb.ShelfId == ShelfId).ToListAsync();
-
             return booksFromShelf;
         }
         public async Task RemoveAllShelfBooks(Guid ShelfId)

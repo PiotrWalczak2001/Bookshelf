@@ -43,6 +43,7 @@ namespace BookShelf.App.Services
             {
                 return false;
             }
+            
         }
 
         public async Task<bool> Register(string firstName, string lastName, string userName, string email, string password)
