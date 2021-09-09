@@ -90,7 +90,7 @@ namespace Bookshelf.Api.Controllers
 
         [HttpDelete("shelfbook/{id}")]
         [Authorize]
-        public async Task<ActionResult> DeleteShelfBook(Guid id)
+        public async Task<ActionResult> RemoveShelfBook(Guid id)
         {
             var deleteBookFromShelfCommand = new RemoveBookFromShelfCommand() { Id = id };
             await _mediator.Send(deleteBookFromShelfCommand);

@@ -1,0 +1,44 @@
+﻿@page "/addbooktoshelf/{BookId}"
+
+<h1>Add book to shelf</h1>
+
+<div class="col-2">
+    <img src="@Book.CoverImageUrl" class="img-responsive rounded-circle" />
+</div>
+<div class="col-10 row">
+    <div class="col-xs-12 col-sm-8">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Title</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Book.Title</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Author</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Book.Author</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Release date</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Book.ReleaseDate</label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<EditForm Model="@ShelfBook" OnValidSubmit="@AddBookToShelfSubmit">
+    <div class="form-group row">
+        <label for="shelf" class="col-sm-3">Shelf: </label>
+        <InputSelect id="shelf" class="form-control col-sm-8" @bind-Value="@ShelfBook.ShelfId">
+            @foreach (var shelf in Shelves)
+            {
+                <option value="@shelf.Id">@shelf.Name</option>
+            }
+        </InputSelect>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add to shelf</button>
+</EditForm>

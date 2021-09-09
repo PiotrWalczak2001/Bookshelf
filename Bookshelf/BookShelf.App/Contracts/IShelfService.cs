@@ -13,7 +13,7 @@ namespace BookShelf.App.Contracts
         Task<Guid> Create(ShelfDetailViewModel shelfDetailViewModel);
         Task Update(ShelfDetailViewModel shelfDetailViewModel);
         Task Delete(Guid Id);
-        //add shelfbook to shelf
-        //remove shelfbook from shelf
+        Task<Guid> AddBookToShelf(ShelfBookViewModel shelfBookViewModel);
+        Task RemoveBookFromShelf(Guid shelfBookId);
     }
 }

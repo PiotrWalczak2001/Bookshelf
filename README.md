@@ -21,7 +21,7 @@ Project example Asp.Net Core Api + Blazor WebAssembly client side of application
 
 - Login/Register/Logout
 - Book/Category/Shelves CRUD
-- Adding/Removing books to shelves by API but not yet in Blazor App
+- Adding/Removing books to/from shelves
 
 ## Features to do
 
@@ -43,7 +43,7 @@ Project example Asp.Net Core Api + Blazor WebAssembly client side of application
 
 ### Controllers
 
-- AccountController (authenticate/register
+- AccountController (authenticate/register)
 - BookController (Getting all books / book details by Id / adding new book / deleting / updating)
 - CategoryController (Getting all categories / category details by Id / adding new category / deleting) 
 - ShelfController (Getting all shelves / user shelf by Id / adding new shelf / deleting updating / adding shelfbooks to shlef and removing)

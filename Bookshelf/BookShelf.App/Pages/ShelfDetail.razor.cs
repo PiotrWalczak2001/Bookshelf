@@ -15,13 +15,19 @@ namespace BookShelf.App.Pages
         public string NoBooksMessage { get; set; }
         [Inject]
         public IShelfService ShelfService { get; set; }
+
         public ICollection<ShelfBookViewModel> ShelfBooks { get; set; }
         public ShelfDetailViewModel Shelf { get; set; } = new();
+        public ShelfBookViewModel ShelfBook { get; set; } = new();
 
         protected async override Task OnInitializedAsync()
         {
             Shelf = await ShelfService.GetById(Guid.Parse(ShelfId));
             ShelfBooks = Shelf.ShelfBooks;
+        }
+        protected async Task RemoveBookFromShelfSubmit()
+        {
+            await ShelfService.RemoveBookFromShelf(ShelfBook.Id);
         }
     }
 }

@@ -88,5 +88,27 @@ namespace BookShelf.App.Services
             var shelfJson = new StringContent(JsonSerializer.Serialize(shelfDetailViewModel), Encoding.UTF8, "application/json");
             await _httpClient.PutAsync(relativeUri, shelfJson);
         }
+
+        public async Task<Guid> AddBookToShelf(ShelfBookViewModel shelfBookViewModel)
+        {
+            await AddBearerToken();
+            string relativeUri = $"{_httpClient.BaseAddress}/shelfbook/add";
+
+            var shelfBookJson = new StringContent(JsonSerializer.Serialize(shelfBookViewModel), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(relativeUri, shelfBookJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync());
+            }
+            return Guid.Empty;
+        }
+
+        public async Task RemoveBookFromShelf(Guid shelfBookId)
+        {
+            await AddBearerToken();
+            string relativeUri = $"{_httpClient.BaseAddress}/shelfbook/{shelfBookId}";
+            await _httpClient.DeleteAsync(relativeUri);
+        }
     }
 }

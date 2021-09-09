@@ -34,4 +34,19 @@ else
             }
         </tbody>
     </table>
+
+    <EditForm Model="@ShelfBook" OnValidSubmit="@RemoveBookFromShelfSubmit">
+        <div class="form-group row">
+            <label for="shelf" class="col-sm-3">Book to remove: </label>
+            <InputSelect id="shelf" class="form-control col-sm-8" @bind-Value="@ShelfBook.Id">
+                @foreach (var shelfbook in Shelf.ShelfBooks)
+                    {
+                    <option value="@shelfbook.Id">@shelfbook.Title</option>
+                    }
+            </InputSelect>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Remove book from shelf</button>
+    </EditForm>
+
 }
