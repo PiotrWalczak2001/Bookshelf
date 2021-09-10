@@ -12,5 +12,6 @@ namespace Bookshelf.Application.Features.Books.Commands.AddBook
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }
         public Guid CategoryId { get; set; }
+        public byte[] BookBytes { get; set; }
     }
 }

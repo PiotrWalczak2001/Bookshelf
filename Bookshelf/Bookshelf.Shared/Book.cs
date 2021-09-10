@@ -12,5 +12,6 @@ namespace Bookshelf.Shared
         public DateTime ReleaseDate { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
+        public byte[] BookBytes { get; set; }
     }
 }

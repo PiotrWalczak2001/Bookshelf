@@ -12,7 +12,6 @@ namespace BookShelf.App.Pages
     {
         [Parameter]
         public string ShelfId { get; set; }
-        public string NoBooksMessage { get; set; }
         [Inject]
         public IShelfService ShelfService { get; set; }
 

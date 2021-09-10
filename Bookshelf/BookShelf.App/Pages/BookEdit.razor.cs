@@ -1,8 +1,10 @@
 ﻿using BookShelf.App.Contracts;
 using BookShelf.App.ViewModels;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,18 +39,43 @@ namespace BookShelf.App.Pages
 
             CategoryId = Book.CategoryId;
         }
-
+        private IReadOnlyList<IBrowserFile> selectedFiles;
+        private void OnInputFileChange(InputFileChangeEventArgs e)
+        {
+            selectedFiles = e.GetMultipleFiles();
+            StateHasChanged();
+        }
         protected async Task SendEdit()
         {
             Book.CategoryId = CategoryId;
             Book.Category = await CategoryService.GetById(Book.CategoryId);
             if (Book.Id == Guid.Empty)
             {
+                if (selectedFiles != null)
+                {
+                    var file = selectedFiles[0];
+                    Stream stream = file.OpenReadStream();
+                    MemoryStream ms = new();
+                    await stream.CopyToAsync(ms);
+                    stream.Close();
+
+                    Book.BookBytes = ms.ToArray();
+                }
                 Book.Id = Guid.NewGuid();
                 await BookService.Create(Book);
             }
             else
             {
+                if (selectedFiles != null)
+                {
+                    var file = selectedFiles[0];
+                    Stream stream = file.OpenReadStream();
+                    MemoryStream ms = new();
+                    await stream.CopyToAsync(ms);
+                    stream.Close();
+
+                    Book.BookBytes = ms.ToArray();
+                }
                 await BookService.Update(Book);
             }
 

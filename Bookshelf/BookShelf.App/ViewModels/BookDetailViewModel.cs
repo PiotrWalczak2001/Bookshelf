@@ -15,5 +15,6 @@ namespace BookShelf.App.ViewModels
         public DateTime ReleaseDate { get; set; }
         public Guid CategoryId { get; set; }
         public CategoryViewModel Category { get; set; }
+        public byte[] BookBytes { get; set; }
     }
 }

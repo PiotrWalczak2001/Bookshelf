@@ -3,12 +3,14 @@ using Bookshelf.Application.Features.Books.Commands.DeleteBook;
 using Bookshelf.Application.Features.Books.Commands.UpdateBook;
 using Bookshelf.Application.Features.Books.Queries.GetAllBooks;
 using Bookshelf.Application.Features.Books.Queries.GetBookDetails;
+using Bookshelf.Application.Features.Books.Queries.GetBookToRead;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Bookshelf.Api.Controllers
@@ -75,6 +77,16 @@ namespace Bookshelf.Api.Controllers
             var deleteBookCommand = new DeleteBookCommand() { Id = id };
             await _mediator.Send(deleteBookCommand);
             return NoContent();
+        }
+
+        [HttpGet]
+        [Route("readbook")]
+        public async Task<ActionResult> ReadBook(Guid bookId)
+        {
+            var query = new GetBookToReadQuery { Id = bookId };
+            var response = await _mediator.Send(query);
+            MemoryStream ms = new MemoryStream(response.BookBytes);
+            return new FileStreamResult(ms, "application/pdf");
         }
     }
 }
