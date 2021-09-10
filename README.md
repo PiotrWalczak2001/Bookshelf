@@ -22,10 +22,10 @@ Project example Asp.Net Core Api + Blazor WebAssembly client side of application
 - Login/Register/Logout
 - Book/Category/Shelves CRUD
 - Adding/Removing books to/from shelves
+- Reading pdf books from database (at the beginning you have to add new book and upload file or update books in database by adding them files (look at date time!))
 
 ## Features to do
 
-- Reading books from pdf (maybe with ironpdf or something else)
 - Roles like administrator that can manage Books and Categories
 - Searching by categories/authors/title and tags (searching filters)
 - Subcriber role with confirming mailing by sendgrid
@@ -44,6 +44,6 @@ Project example Asp.Net Core Api + Blazor WebAssembly client side of application
 ### Controllers
 
 - AccountController (authenticate/register)
-- BookController (Getting all books / book details by Id / adding new book / deleting / updating)
+- BookController (Getting all books / book details by Id / adding new book / deleting / updating / read book from database)
 - CategoryController (Getting all categories / category details by Id / adding new category / deleting) 
 - ShelfController (Getting all shelves / user shelf by Id / adding new shelf / deleting updating / adding shelfbooks to shlef and removing)
