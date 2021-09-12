@@ -50,6 +50,7 @@ namespace BookShelf.App.Services
             var shelf = await JsonSerializer.DeserializeAsync<ShelfDetailViewModel>(
                 await _httpClient.GetStreamAsync(relativeUri),
                 new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
             var mappedShelf = _mapper.Map<ShelfDetailViewModel>(shelf);
 
             return mappedShelf;
@@ -63,7 +64,8 @@ namespace BookShelf.App.Services
             var uid = await ((CustomAuthenticationStateProvider)_authenticationStateProvider).GetUserId();
             shelfDetailViewModel.UserId = Guid.Parse(uid);
 
-            var shelfJson = new StringContent(JsonSerializer.Serialize(shelfDetailViewModel), Encoding.UTF8, "application/json");
+            var mappedShelf = _mapper.Map<ShelfDetailViewModel>(shelfDetailViewModel);
+            var shelfJson = new StringContent(JsonSerializer.Serialize(mappedShelf), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(relativeUri, shelfJson);
 
             if (response.IsSuccessStatusCode)
@@ -85,7 +87,9 @@ namespace BookShelf.App.Services
         {
             await AddBearerToken();
             string relativeUri = $"{_httpClient.BaseAddress}";
-            var shelfJson = new StringContent(JsonSerializer.Serialize(shelfDetailViewModel), Encoding.UTF8, "application/json");
+
+            var mappedShelf = _mapper.Map<ShelfDetailViewModel>(shelfDetailViewModel);
+            var shelfJson = new StringContent(JsonSerializer.Serialize(mappedShelf), Encoding.UTF8, "application/json");
             await _httpClient.PutAsync(relativeUri, shelfJson);
         }
 
@@ -94,7 +98,8 @@ namespace BookShelf.App.Services
             await AddBearerToken();
             string relativeUri = $"{_httpClient.BaseAddress}/shelfbook/add";
 
-            var shelfBookJson = new StringContent(JsonSerializer.Serialize(shelfBookViewModel), Encoding.UTF8, "application/json");
+            var mappedShelfBook = _mapper.Map<ShelfBookViewModel>(shelfBookViewModel);
+            var shelfBookJson = new StringContent(JsonSerializer.Serialize(mappedShelfBook), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(relativeUri, shelfBookJson);
 
             if (response.IsSuccessStatusCode)

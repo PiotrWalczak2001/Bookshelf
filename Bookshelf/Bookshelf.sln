@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShelf.App", "BookShelf.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookshelf.Shared", "Bookshelf.Shared\Bookshelf.Shared.csproj", "{AB2B7B6E-ECCD-46BF-B869-D852EDF34D61}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F593C78E-33F0-4D95-A73E-7CE176AD1D64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelf.Application.UnitTests", "BookShelf.Application.UnitTests\BookShelf.Application.UnitTests.csproj", "{61730639-0885-4B7D-8B98-F177EC5D30A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,10 @@ Global
 		{AB2B7B6E-ECCD-46BF-B869-D852EDF34D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB2B7B6E-ECCD-46BF-B869-D852EDF34D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB2B7B6E-ECCD-46BF-B869-D852EDF34D61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61730639-0885-4B7D-8B98-F177EC5D30A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61730639-0885-4B7D-8B98-F177EC5D30A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61730639-0885-4B7D-8B98-F177EC5D30A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61730639-0885-4B7D-8B98-F177EC5D30A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +78,7 @@ Global
 		{A5E340EA-2284-4974-A698-B0756C35487A} = {2AC227FF-A88D-4E68-844A-0AEC18BD7741}
 		{F71319F9-0CF1-46D5-9D57-2E1AF20320D2} = {A5E340EA-2284-4974-A698-B0756C35487A}
 		{AB2B7B6E-ECCD-46BF-B869-D852EDF34D61} = {A5E340EA-2284-4974-A698-B0756C35487A}
+		{61730639-0885-4B7D-8B98-F177EC5D30A9} = {F593C78E-33F0-4D95-A73E-7CE176AD1D64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06CC5190-5583-452A-A182-330151CBD9B1}

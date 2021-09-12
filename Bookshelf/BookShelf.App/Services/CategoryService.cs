@@ -29,6 +29,7 @@ namespace BookShelf.App.Services
                 new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             var mappedCategories = _mapper.Map<List<CategoryViewModel>>(categories);
+
             return mappedCategories;
         }
 
@@ -40,6 +41,7 @@ namespace BookShelf.App.Services
             var category = await JsonSerializer.DeserializeAsync<CategoryViewModel>(
                 await _httpClient.GetStreamAsync(relativeUri),
                 new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
             var mappedCategory = _mapper.Map<CategoryViewModel>(category);
 
             return mappedCategory;
@@ -49,9 +51,10 @@ namespace BookShelf.App.Services
         public async Task<Guid> Create(CategoryViewModel categoryViewModel)
         {
             await AddBearerToken();
-
             string relativeUri = $"{_httpClient.BaseAddress}";
-            var categoryJson = new StringContent(JsonSerializer.Serialize(categoryViewModel), Encoding.UTF8, "application/json");
+
+            var mappedCategory = _mapper.Map<CategoryViewModel>(categoryViewModel);
+            var categoryJson = new StringContent(JsonSerializer.Serialize(mappedCategory), Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync(relativeUri, categoryJson);
 

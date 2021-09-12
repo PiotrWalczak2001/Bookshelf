@@ -49,7 +49,9 @@ namespace BookShelf.App.Services
             await AddBearerToken();
 
             string relativeUri = $"{_httpClient.BaseAddress}";
-            var bookJson = new StringContent(JsonSerializer.Serialize(bookDetailViewModel), Encoding.UTF8, "application/json");
+
+            var mappedBook = _mapper.Map<BookDetailViewModel>(bookDetailViewModel);
+            var bookJson = new StringContent(JsonSerializer.Serialize(mappedBook), Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync(relativeUri, bookJson);
 
@@ -65,7 +67,9 @@ namespace BookShelf.App.Services
         {
             await AddBearerToken();
             string relativeUri = $"{_httpClient.BaseAddress}";
-            var bookJson = new StringContent(JsonSerializer.Serialize(bookDetailViewModel), Encoding.UTF8, "application/json");
+
+            var mappedBook = _mapper.Map<BookDetailViewModel>(bookDetailViewModel);
+            var bookJson = new StringContent(JsonSerializer.Serialize(mappedBook), Encoding.UTF8, "application/json");
             await _httpClient.PutAsync(relativeUri, bookJson);
         }
 
