@@ -1,6 +1,6 @@
 # Bookshelf
 
-Project example Asp.Net Core Api + Blazor WebAssembly client side of application that looks like netflix or spotify but with books.
+Project example Asp.Net Core Api + Blazor WebAssembly client side of application for reading books from pdf files.
 
 ## Tech Stack
 
@@ -27,23 +27,13 @@ Project example Asp.Net Core Api + Blazor WebAssembly client side of application
 ## Features to do
 
 - Roles like administrator that can manage Books and Categories
-- Searching by categories/authors/title and tags (searching filters)
-- Subcriber role with confirming mailing by sendgrid
-- Following categories with notifications when new book is added to database
-- And I come up with something else
+- Searching by categories/authors/title and tags (searching filters?)
 
-### Entities
+## To do
 
-- Base entity
-- Book
-- Category
-- Shelf
-- Shelfbook (shelfbook is  entity that is stored in shelves)
-- ApplicationUser
-
-### Controllers
-
-- AccountController (authenticate/register)
-- BookController (Getting all books / book details by Id / adding new book / deleting / updating / read book from database)
-- CategoryController (Getting all categories / category details by Id / adding new category / deleting) 
-- ShelfController (Getting all shelves / user shelf by Id / adding new shelf / deleting updating / adding shelfbooks to shlef and removing)
+- Fix IsShelfBookUnique 
+- Tests
+- Error handling
+- Code clean up
+- Comments // yeah I should do it on beginning
+- Front-end things
