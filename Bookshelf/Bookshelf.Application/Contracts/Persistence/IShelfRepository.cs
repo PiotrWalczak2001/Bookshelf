@@ -13,6 +13,6 @@ namespace Bookshelf.Application.Contracts.Persistence
         Task AddBookToShelf(ShelfBook ShelfBook);
         Task RemoveBookFromShelf(Guid ShelfBookId);
         Task<bool> IsShelfUnique(string name, Guid userId);
-        Task<bool> IsShelfBookUnique(Guid shelfId, Guid bookId);
+        Task<bool> IsShelfBookUnique(Guid shelfBookId, Guid shelfId);
     }
 }

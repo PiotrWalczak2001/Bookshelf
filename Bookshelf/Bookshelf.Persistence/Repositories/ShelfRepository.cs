@@ -57,10 +57,13 @@ namespace Bookshelf.Persistence.Repositories
             return Task.FromResult(matchingShelves);
         }
 
-        public Task<bool> IsShelfBookUnique(Guid shelfId, Guid bookId)
+        public async Task<bool> IsShelfBookUnique(Guid shelfBookId, Guid shelfId)
         {
-            var matchingShelfBooks = _dbContext.ShelfBooks.Any(sb => sb.ShelfId.Equals(shelfId) && sb.BookId.Equals(bookId));
-            return Task.FromResult(matchingShelfBooks);
+          //  var matchingShelfBook = await _dbContext.ShelfBooks.FirstOrDefaultAsync(sb => sb.Id == shelfBookId);
+            if (_dbContext.ShelfBooks.Any(sb => sb.BookId == shelfBookId && sb.ShelfId == shelfId))
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -19,7 +19,8 @@ namespace Bookshelf.Application.Features.Shelves.Commands.AddBookToShelf
 
         private async Task<bool> IsShelfBookUnique(AddBookToShelfCommand sb, CancellationToken token)
         {
-            return !(await _shelfRepository.IsShelfBookUnique(sb.BookId, sb.ShelfId));
+            return await _shelfRepository.IsShelfBookUnique(sb.Id, sb.ShelfId);
         }
     }
 }
+    

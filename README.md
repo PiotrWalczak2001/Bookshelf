@@ -31,7 +31,6 @@ Project example Asp.Net Core Api + Blazor WebAssembly client side of application
 
 ## To do
 
-- Fix IsShelfBookUnique 
 - Tests
 - Error handling
 - Code clean up
